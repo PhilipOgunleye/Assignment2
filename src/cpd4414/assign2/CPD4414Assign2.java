@@ -16,9 +16,13 @@
 
 package cpd4414.assign2;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Queue;
+
 /**
  *
- * @author Len Payne <len.payne@lambtoncollege.ca>
+ * @author philip ogunleye <len.payne@lambtoncollege.ca>
  */
 public class CPD4414Assign2 {
 
@@ -27,6 +31,34 @@ public class CPD4414Assign2 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Calendar cald= Calendar.getInstance();
+        System.out.println("Current time is : " + cald.getTime());
+        
+        Date dte= new Date();
+        cald.setTime(dte);
+        
+        System.out.println("The set Time: " + cald.getTime());
+        }
+    public Date nextRequestedOrder(Order orders){
+        if(orders.getTimeReceived()!=null){
+            return null;
+        }
+        return orders.getTimeReceived();
     }
     
-}
+    public void processOrder(Order o)
+    {
+        if(o.getTimeReceived() != null)
+        {
+            o.setTimeReceived(new Date());
+        }
+        else
+        {
+            throw new IllegalStateException("ERROR: Time Recieved cannot be null when processing!");
+        }
+    }
+       
+        
+    }
+    
+
