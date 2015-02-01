@@ -27,8 +27,46 @@ import java.util.Queue;
 public class OrderQueue {
     Queue<Order> orderQueue = new ArrayDeque<>();
     
-    public void add(Order order) {
+    public void add(Order order) throws Exception {
+        if(order.getCustomerId().isEmpty() && order.getCustomerName().isEmpty()){
+        throw new Exception("customer name and ID does not exist");
+        }
         orderQueue.add(order);
         order.setTimeReceived(new Date());
+    }
+    public Order requestOrder(){
+        if(orderQueue.isEmpty()){
+            return null;
+        }
+        return orderQueue.peek();
+    }
+    
+    public void timeProcessed(Order order) throws Exception{
+        
+        if(order.getTimeProcessed()==null){
+            throw new Exception("order does not have a time received");
+            
+        }
+        if(order.getTimeReceived()==null){
+            throw new Exception("order does not have a time received");
+    }
+    }
+    public String report(){
+       if (orderQueue.isEmpty()) {
+           return "";
+       }
+   return "";
+    
+    }
+
+public void timeReceived(Order order) throws Exception {
+        
+        if(order.getTimeProcessed()==null){
+            throw new Exception("order does not have a time received");
+            
+        }
+        if(order.getTimeReceived()==null){
+            throw new Exception("order does not have a time received");
+    }
     }
 }

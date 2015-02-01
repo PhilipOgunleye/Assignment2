@@ -29,7 +29,7 @@ import org.junit.Test;
 
 /**
  *
- * @author Len Payne <len.payne@lambtoncollege.ca>
+ * @author  <len.payne@lambtoncollege.ca>
  */
 public class OrderQueueTest {
     
@@ -53,7 +53,7 @@ public class OrderQueueTest {
     }
 
     @Test
-    public void testWhenCustomerExistsAndPurchasesExistThenTimeReceivedIsNow() {
+    public void testWhenCustomerExistsAndPurchasesExistThenTimeReceivedIsNow() throws Exception {
         OrderQueue orderQueue = new OrderQueue();
         Order order = new Order("CUST00001", "ABC Construction");
         order.addPurchase(new Purchase("PROD0004", 450));
@@ -65,4 +65,148 @@ public class OrderQueueTest {
         assertTrue(Math.abs(result - expResult) < 1000);
     }
     
+     @Test
+      public void testWhenNeitherCustomerIdNorCustomerNameExistsThrowAnException(){
+        OrderQueue orderQueue = new OrderQueue();
+        boolean result = false;
+        Order order = new Order("","");
+        try{
+        orderQueue.add(order);
+         }
+        catch(Exception e){
+          result=true;
+        }
+        assertTrue(result);
+      }
+    @Test
+      public void testWhenNoListOfPurchasesThrowException(){
+      Boolean result=false;
+      OrderQueue orderQueue = new OrderQueue();
+        Order order = new Order("","");
+       
+        try{
+        orderQueue.add(order);
+        
+        }
+        catch(Exception e){
+            result = true;
+                    
+        }assertTrue(result);
+                 
+             
+          
+      }
+
+ @Test
+    public void testWhenNoOrdersInSystemReturnOrderWithEarliestTimeReceivedWithNoTimeProcessed() throws Exception {
+        OrderQueue orderQueue = new OrderQueue();
+        Order order = new Order("CUST00001", "ABC Construction");
+        order.addPurchase(new Purchase("PROD0004", 450));
+        order.addPurchase(new Purchase("PROD0006", 250));
+        orderQueue.add(order);
+        Order outcomeA=orderQueue.requestOrder();
+        Order outcomeB= orderQueue.orderQueue.peek();
+        assertEquals(outcomeA,outcomeB);
+        
+        
+
+    }
+    @Test
+    public void testWhenNoOrdersInTheSystemReturnNull(){
+     OrderQueue orderQueue = new OrderQueue();
+     Order outcomeB = orderQueue.requestOrder();
+     assertEquals(outcomeB, null);
+        
+        
+    }
+    
+    @Test
+    public void testWhenOrderHasATimeReceivedAndPurchasesInStockThenTimeProcessedIsNow() throws Exception {
+        
+        OrderQueue orderQueue = new OrderQueue();
+        Order order = new Order("CUST00001", "ABC Construction");
+        order.addPurchase(new Purchase("PROD0004", 450));
+        order.addPurchase(new Purchase("PROD0006", 250));
+        orderQueue.add(order);
+        
+        long expResult = new Date().getTime();
+        long result = order.getTimeProcessed().getTime();
+        assertTrue(Math.abs(result - expResult) < 1000);
+    
+    
+    
 }
+    
+    @Test
+      public void testWhenOrderDoesNotHaveTimeReceivedThrowAnException(){
+        OrderQueue orderQueue = new OrderQueue();
+        boolean result = false;
+        Order order = new Order("","");
+        try{
+        orderQueue.timeReceived(order);
+         }
+        catch(Exception e){
+          result=true;
+        }
+        assertTrue(result);
+      }
+    
+      @Test
+    public void testWhenOrderHasATimeReceivedAndPurchasesInStockThenTimeFulfilledIsNow() throws Exception {
+        
+        OrderQueue orderQueue = new OrderQueue();
+        Order order = new Order("CUST00001", "ABC Construction");
+        order.addPurchase(new Purchase("PROD0004", 450));
+        order.addPurchase(new Purchase("PROD0006", 250));
+        orderQueue.add(order);
+        
+        long expResult = new Date().getTime();
+        long result = order.getTimeFulfilled().getTime();
+        assertTrue(Math.abs(result - expResult) < 1000);
+    
+}
+    
+    @Test
+      public void testWhenOrderDoesNotHaveTimeProcessedThrowAnException(){
+        OrderQueue orderQueue = new OrderQueue();
+        boolean result = false;
+        Order order = new Order("","");
+        try{
+        orderQueue.timeProcessed(order);
+         }
+        catch(Exception e){
+          result=true;
+        }
+        assertTrue(result);
+      }
+      
+       @Test
+//      public void testWhenOrderDoesNotHaveTimeReceivedThrowAnException(){
+//        OrderQueue orderQueue = new OrderQueue();
+//        boolean result = false;
+//        Order order = new Order("","");
+//        try{
+//        orderQueue.add(timeReceivd);
+//         }
+//        catch(Exception e){
+//          result=true;
+//        }
+//        assertTrue(result);
+//      }
+      
+
+    public void testWhenNoOrdersInTheSystemReturnEmptyString(){
+      OrderQueue orderQueue = new OrderQueue();
+ String outcomeA = orderQueue.report();
+   assertEquals("",outcomeA);
+      
+      
+}
+}
+      
+      
+      
+      
+      
+
+
