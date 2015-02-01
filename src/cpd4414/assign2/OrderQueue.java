@@ -71,4 +71,33 @@ public class OrderQueue {
             throw new Exception("order does not have a time received");
         }
     }
+
+    private boolean Stock(int quantity, String productId) {
+
+        boolean StockSTK = true;
+        if (quantity > Inventory.getQuantityForId(productId)) {
+            StockSTK = false;
+        }
+        return StockSTK;
+
+    }
+
+    void fulfilledOrder(Order nextOrder) throws Exception {
+
+        boolean StockSTK = true;
+        if (nextOrder.getTimeReceived() != null) {
+            if (nextOrder.getTimeProcessed() != null) {
+                for (int i = 0; i < nextOrder.getListOfPurchases().size(); i++) {
+                    StockSTK = Stock(nextOrder.getListOfPurchases().get(i).getQuantity(), nextOrder.getListOfPurchases().get(i).getProductId());
+                }
+                if (StockSTK) {
+                    nextOrder.setTimeFulfilled(new Date());
+                }
+            } else {
+                throw new Exception("order has a time processed and a time received and all of the purchases are in-stock in the inventory table");
+            }
+        } else {
+            throw new Exception("when the order does not have a time received, then throw an exception");
+        }
+    }
 }

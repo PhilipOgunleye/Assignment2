@@ -15,9 +15,6 @@
  */
 package cpd4414.assign2;
 
-import cpd4414.assign2.OrderQueue;
-import cpd4414.assign2.Purchase;
-import cpd4414.assign2.Order;
 import java.util.Date;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -171,6 +168,9 @@ public class OrderQueueTest {
         assertTrue(result);
     }
 
+    /**
+     *
+     */
     @Test
     public void testWhenfulfillOrderWhenTheOrderDoesNotTimeProcessed() {
         boolean flag = false;
@@ -187,7 +187,10 @@ public class OrderQueueTest {
         }
         assertTrue(flag);
     }
-
+/**
+     *
+     */
+    @Test
     public void testWhenNoOrdersInTheSystemReturnEmptyString() {
         OrderQueue orderQueue = new OrderQueue();
         String outcomeA = orderQueue.report();
