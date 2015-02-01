@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package cpd4414.assign2;
 
 import java.util.ArrayDeque;
@@ -22,51 +21,54 @@ import java.util.Queue;
 
 /**
  *
- * @author Len Payne <len.payne@lambtoncollege.ca>
+ * @author philip
  */
 public class OrderQueue {
+
     Queue<Order> orderQueue = new ArrayDeque<>();
-    
+
     public void add(Order order) throws Exception {
-        if(order.getCustomerId().isEmpty() && order.getCustomerName().isEmpty()){
-        throw new Exception("customer name and ID does not exist");
+        if (order.getCustomerId().isEmpty() && order.getCustomerName().isEmpty()) {
+            throw new Exception("customer name and ID does not exist");
         }
         orderQueue.add(order);
         order.setTimeReceived(new Date());
     }
-    public Order requestOrder(){
-        if(orderQueue.isEmpty()){
+
+    public Order requestOrder() {
+        if (orderQueue.isEmpty()) {
             return null;
         }
         return orderQueue.peek();
     }
-    
-    public void timeProcessed(Order order) throws Exception{
-        
-        if(order.getTimeProcessed()==null){
-            throw new Exception("order does not have a time received");
-            
+
+    public void timeProcessed(Order order) throws Exception {
+
+        if (order.getTimeProcessed() == null) {
+            throw new Exception("order does not have a time processed");
+
         }
-        if(order.getTimeReceived()==null){
+        if (order.getTimeReceived() == null) {
             throw new Exception("order does not have a time received");
-    }
-    }
-    public String report(){
-       if (orderQueue.isEmpty()) {
-           return "";
-       }
-   return "";
-    
+        }
     }
 
-public void timeReceived(Order order) throws Exception {
-        
-        if(order.getTimeProcessed()==null){
-            throw new Exception("order does not have a time received");
-            
+    public String report() {
+        if (orderQueue.isEmpty()) {
+            return "";
         }
-        if(order.getTimeReceived()==null){
-            throw new Exception("order does not have a time received");
+        return "";
+
     }
+
+    public void timeReceived(Order order) throws Exception {
+
+        if (order.getTimeProcessed() == null) {
+            throw new Exception("order does not have a time received");
+
+        }
+        if (order.getTimeReceived() == null) {
+            throw new Exception("order does not have a time received");
+        }
     }
 }

@@ -22,7 +22,7 @@ import java.util.Queue;
 
 /**
  *
- * @author philip ogunleye <len.payne@lambtoncollege.ca>
+ * @author philip ogunleye 
  */
 public class CPD4414Assign2 {
 
